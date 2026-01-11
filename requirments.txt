@@ -1,7 +1,4 @@
 streamlit
-sounddevice
-wavio
-vosk
-python-dotenv
 pillow
+python-dotenv
 requests
