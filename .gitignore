@@ -1,19 +1,18 @@
 # virtual environment
 venv/
 
-# python cache
+# cache
 __pycache__/
 *.pyc
 
-# audio & outputs
-*.wav
+# generated files
 *.png
 *.pdf
+*.wav
 
-# environment variables
+# env variables
 .env
 
-# ML models (too large)
-vosk-model/
-stable-diffusion-webui/
-models/
+# OS files
+.DS_Store
+Thumbs.db
