@@ -6,12 +6,10 @@ import streamlit as st
 import requests
 #helps python to talk to os system
 import os
-#helps us to store openai key securely
-from dotenv import load_dotenv
 #image creation utilities
 from PIL import Image, ImageDraw, ImageFont
 
-load_dotenv()
+
 
 #STREAMLIT USER INTERFACE
 
@@ -95,3 +93,4 @@ if st.button("🎨 Generate Image"):
                     file_name="text_image.pdf",
                     mime="application/pdf"
                 )
+
