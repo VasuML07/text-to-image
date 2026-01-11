@@ -1,40 +1,34 @@
-📝 Text to Image Generator (Offline & Free)
+📝 Text to Image Generator
 
-A simple and interactive Streamlit web application that converts user-provided text into an image, with options to download the output as PNG or PDF.
+A simple Streamlit web application that converts user-entered text into an image and allows downloading the result as a PNG or PDF.
 
-This project is designed to be fully offline, API-free, and easy to deploy, making it ideal for learning, demos, and academic submissions.
+The project is lightweight, runs offline, and requires no external APIs or paid services.
 
 🚀 Features
 
-✍️ Text input up to 400 characters
+✍️ Text input (up to 400 characters)
 
-🖼️ Generates an image from the entered text
+🖼️ Generate an image from text
 
-📄 Download output as PNG or PDF
+📥 Download output as PNG or PDF
 
 ⚡ Fast and lightweight
 
-🌐 Streamlit-based interactive UI
+🌐 Interactive Streamlit UI
 
-🔒 No API keys, no paid services
-
-☁️ Compatible with Streamlit Cloud
+☁️ Fully deployable on Streamlit Cloud
 
 🧠 How It Works
 
-User enters descriptive text (up to 400 characters)
+User enters text in the input box
 
-The app renders the text onto an image canvas using Pillow
+The text is rendered onto a fixed-size image canvas
 
 The generated image is displayed instantly
 
-The user can download the result as:
+The user can download the image as PNG or PDF
 
-PNG image
-
-PDF document
-
-This approach avoids external dependencies and ensures reproducibility.
+The image is created locally using Python libraries without any external services.
 
 🛠️ Tech Stack
 
@@ -42,92 +36,97 @@ Python
 
 Streamlit – Web interface
 
-Pillow (PIL) – Image generation
-
-python-dotenv – Environment handling
-
-Requests – Utility support
+Pillow (PIL) – Image creation and rendering
 
 📁 Project Structure
-speech-to-image/
+text-to-image/
 ├── speechtoimage.py
 ├── requirements.txt
 ├── README.md
 └── .gitignore
 
-
-Generated files (images, PDFs) and virtual environments are excluded using .gitignore.
-
 ▶️ Run Locally
-1️⃣ Create and activate virtual environment
+1️⃣ Create virtual environment
 python -m venv venv
 venv\Scripts\activate
 
 2️⃣ Install dependencies
 pip install -r requirements.txt
 
-3️⃣ Run the app
+3️⃣ Run the application
 streamlit run speechtoimage.py
 
 
-Open your browser at:
+Open in browser:
 
 http://localhost:8501
 
 ☁️ Deployment (Streamlit Cloud)
 
-This project is fully deployable on Streamlit Cloud.
+This application is compatible with Streamlit Cloud.
 
 Steps:
 
 Push this repository to GitHub
 
-Go to https://share.streamlit.io
+Visit https://share.streamlit.io
 
 Click New App
 
 Select:
 
-Repository: speech-to-image
+Repository
 
 Branch: main
 
-File: speechtoimage.py
+File path: speechtoimage.py
 
 Click Deploy
 
-🎓 Use Cases
+🎯 Use Cases
 
-College mini / major project
+College mini project
 
-Streamlit learning project
+Python + Streamlit practice
 
-UI + image processing demo
-
-Offline alternative to API-based tools
+Text visualization demo
 
 Portfolio project
 
+UI prototyping
+
 ⚠️ Notes
 
-This project intentionally avoids speech input and cloud APIs to remain deployable.
+Maximum input length is limited to 400 characters
 
-A speech-to-text version (using Vosk) can be run locally but is not suitable for cloud deployment due to microphone restrictions.
+Generated files are excluded from version control via .gitignore
 
-For real AI-generated images, local Stable Diffusion can be integrated separately.
+This project focuses on text rendering, not AI image generation
 
 📌 Future Enhancements
 
 Text wrapping for long inputs
 
-Custom fonts and colors
+Custom font selection
 
-Background themes (dark/light)
+Background color themes
 
-Image gallery / history
+Image export formats
 
-Local Stable Diffusion integration
+Batch image generation
 
 👨‍💻 Author
 
-Built as a learning-focused, cost-free alternative to API-based text-to-image tools.
+Developed as a simple, clean, and deployable Streamlit application.
+
+✅ Summary
+
+This project demonstrates:
+
+Clean UI design
+
+Proper file handling
+
+Streamlit deployment readiness
+
+Responsible project scoping
