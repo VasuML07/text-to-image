@@ -22,8 +22,9 @@ st.caption("Enter text → Generate image → Download as PNG or PDF")
 st.sidebar.header("ℹ️ Instructions")
 st.sidebar.write(
     """
-    • Enter a description (max **1000 characters**)  
+    • Enter a description (max **1500 characters**)  
     • Each line will contain **max 100 characters**  
+    • Text is rendered in **large readable font**  
     • Image is generated locally  
     • Works **offline**  
     • Download as **PNG or PDF**
@@ -32,9 +33,9 @@ st.sidebar.write(
 
 #TEXT INPUT
 text_input = st.text_area(
-    "Enter text (max 1000 characters):",
-    max_chars=1000,
-    height=200,
+    "Enter text (max 1500 characters):",
+    max_chars=1500,
+    height=250,
     placeholder="Example: A dog playing football in a green park..."
 )
 
@@ -57,16 +58,16 @@ if st.button("🎨 Generate Image"):
         draw = ImageDraw.Draw(img)
 
         try:
-            font = ImageFont.truetype("arial.ttf", 36)
+            font = ImageFont.truetype("arial.ttf", 48)
         except:
             font = ImageFont.load_default()
 
-        #calculate total text height
-        line_height = font.getbbox("A")[3] + 10
+        #line spacing
+        line_height = font.getbbox("A")[3] + 16
         total_text_height = line_height * len(wrapped_lines)
 
-        #starting Y to vertically center text block
-        y_start = (1024 - total_text_height) // 2
+        #center vertically
+        y_start = max((1024 - total_text_height) // 2, 20)
 
         #draw each line centered
         for line in wrapped_lines:
