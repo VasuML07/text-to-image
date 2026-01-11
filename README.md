@@ -1,32 +1,36 @@
 📝 Text to Image Generator (Offline & Deployable)
 
-A Streamlit web application that converts user-entered text into an image and allows downloading the result as a PNG or PDF.
+A Streamlit web application that converts user-entered text into a structured image, with options to download the output as PNG or PDF.
 
 Unlike popular AI tools such as ChatGPT or Gemini, this project is designed to be fully offline, transparent, and reproducible, making it ideal for learning, deployment, and academic use.
 
 🚀 What This Project Provides (Beyond AI Chat Tools)
 
-While tools like ChatGPT and Gemini focus on AI-generated content via cloud APIs, this project offers:
+While tools like ChatGPT and Gemini rely on cloud-based AI models and APIs, this project focuses on control, simplicity, and deployability.
 
-✅ Offline execution (no internet required)
+It provides:
+
+✅ Offline execution (no internet required after setup)
 
 ✅ No API keys, no usage limits
 
 ✅ Full control over output files
 
-✅ Direct image & PDF downloads
+✅ Direct PNG & PDF downloads
 
-✅ Deployable Streamlit web app
+✅ Deployable Streamlit web application
 
-✅ Transparent and explainable pipeline
+✅ Transparent and explainable processing pipeline
 
-This makes the project especially suitable for education, demos, and environments where cloud AI tools are restricted.
+This makes the project especially suitable for education, demos, restricted environments, and academic evaluation.
 
 🚀 Features
 
-✍️ Text input (up to 400 characters)
+✍️ Text input up to 1500 characters
 
-🖼️ Convert text into a visual image
+📄 Automatic line-by-line rendering (max 100 characters per line)
+
+🖼️ Convert text into a clean, readable image
 
 📥 Download output as PNG or PDF
 
@@ -40,26 +44,29 @@ This makes the project especially suitable for education, demos, and environment
 
 🧠 How It Works
 
-User enters text in the input box
+User enters text (up to 1500 characters)
 
-The text is rendered onto a fixed-size image canvas
+Text is automatically split into readable lines
+
+Each line is rendered onto a fixed-size image canvas
 
 The generated image is displayed instantly
 
-The user can download the result as a PNG or PDF
+User can download the output as PNG or PDF
 
-The image is created locally using Python libraries, ensuring predictability and reproducibility.
+All processing happens locally using Python libraries, ensuring predictable and reproducible results.
 
 🆚 Comparison with AI Models (ChatGPT, Gemini)
 Feature	This Project	ChatGPT / Gemini
 Offline usage	✅ Yes	❌ No
 API key required	❌ No	✅ Yes
+Usage limits	❌ No	✅ Yes
 Direct image/PDF download	✅ Yes	❌ Limited
 Deployable as web app	✅ Yes	❌ No
 Full code control	✅ Yes	❌ No
 Reproducible output	✅ Yes	❌ No
 
-This project does not replace AI models — it complements them by focusing on control, simplicity, and deployment.
+This project does not replace AI models — it complements them by focusing on controlled text visualization and deployment, rather than AI-generated imagery.
 
 🛠️ Tech Stack
 
@@ -67,7 +74,7 @@ Python
 
 Streamlit – Web interface
 
-Pillow (PIL) – Image creation and rendering
+Pillow (PIL) – Image creation and text rendering
 
 📁 Project Structure
 text-to-image/
@@ -128,19 +135,21 @@ UI and deployment practice
 
 ⚠️ Notes
 
-Maximum input length is limited to 400 characters
+Maximum input length is limited to 1500 characters
 
-Generated files are excluded via .gitignore
+Each rendered line contains a maximum of 100 characters
 
-This project focuses on text visualization, not AI-generated imagery
+Generated files are excluded using .gitignore
+
+This project focuses on text visualization, not AI image generation
 
 📌 Future Enhancements
 
-Text wrapping for long inputs
+Dynamic font size scaling
 
-Custom fonts and themes
+Custom font selection
 
-Background customization
+Background color and theme options
 
 Batch image generation
 
@@ -156,10 +165,10 @@ This project demonstrates:
 
 Practical software engineering
 
-Responsible project scoping
-
 Offline-first design
 
-Deployment-ready Streamlit apps
+Clean UI and file handling
 
-Clear differentiation from cloud AI models
+Deployment-ready Streamlit applications
+
+Clear differentiation from cloud-based AI models
