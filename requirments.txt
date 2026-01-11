@@ -1,0 +1,7 @@
+streamlit
+sounddevice
+wavio
+vosk
+python-dotenv
+pillow
+requests

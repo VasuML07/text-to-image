@@ -1,0 +1,19 @@
+# virtual environment
+venv/
+
+# python cache
+__pycache__/
+*.pyc
+
+# audio & outputs
+*.wav
+*.png
+*.pdf
+
+# environment variables
+.env
+
+# ML models (too large)
+vosk-model/
+stable-diffusion-webui/
+models/
