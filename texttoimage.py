@@ -8,6 +8,7 @@ import requests
 import os
 #image creation utilities
 from PIL import Image, ImageDraw, ImageFont
+import textwrap
 
 
 
@@ -21,7 +22,8 @@ st.caption("Enter text → Generate image → Download as PNG or PDF")
 st.sidebar.header("ℹ️ Instructions")
 st.sidebar.write(
     """
-    • Enter a description (max **400 characters**)  
+    • Enter a description (max **1000 characters**)  
+    • Each line will contain **max 100 characters**  
     • Image is generated locally  
     • Works **offline**  
     • Download as **PNG or PDF**
@@ -30,10 +32,10 @@ st.sidebar.write(
 
 #TEXT INPUT
 text_input = st.text_area(
-    "Enter text (max 400 characters):",
-    max_chars=400,
-    height=150,
-    placeholder="Example: A dog playing football in a green park"
+    "Enter text (max 1000 characters):",
+    max_chars=1000,
+    height=200,
+    placeholder="Example: A dog playing football in a green park..."
 )
 
 #BUTTON
@@ -42,6 +44,9 @@ if st.button("🎨 Generate Image"):
 
         #ensure text fallback
         text = text_input.strip() if text_input.strip() else "Image Generated"
+
+        #wrap text into lines of max 100 chars
+        wrapped_lines = textwrap.wrap(text, width=100)
 
         #paths
         image_path = "generated_image.png"
@@ -52,19 +57,25 @@ if st.button("🎨 Generate Image"):
         draw = ImageDraw.Draw(img)
 
         try:
-            font = ImageFont.truetype("arial.ttf", 60)
+            font = ImageFont.truetype("arial.ttf", 36)
         except:
             font = ImageFont.load_default()
 
-        #center text
-        bbox = draw.textbbox((0, 0), text, font=font)
-        text_width = bbox[2] - bbox[0]
-        text_height = bbox[3] - bbox[1]
+        #calculate total text height
+        line_height = font.getbbox("A")[3] + 10
+        total_text_height = line_height * len(wrapped_lines)
 
-        x = (1024 - text_width) // 2
-        y = (1024 - text_height) // 2
+        #starting Y to vertically center text block
+        y_start = (1024 - total_text_height) // 2
 
-        draw.text((x, y), text, fill="black", font=font)
+        #draw each line centered
+        for line in wrapped_lines:
+            bbox = draw.textbbox((0, 0), line, font=font)
+            text_width = bbox[2] - bbox[0]
+            x = (1024 - text_width) // 2
+
+            draw.text((x, y_start), line, fill="black", font=font)
+            y_start += line_height
 
         #save files
         img.save(image_path)
@@ -93,4 +104,3 @@ if st.button("🎨 Generate Image"):
                     file_name="text_image.pdf",
                     mime="application/pdf"
                 )
-
