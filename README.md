@@ -1,5 +1,5 @@
 📝 Text to Image Generator (Offline & Deployable)
-
+https://text-to-image-12.streamlit.app/
 A Streamlit web application that converts user-entered text into a structured image, with options to download the output as PNG or PDF.
 
 Unlike popular AI tools such as ChatGPT or Gemini, this project is designed to be fully offline, transparent, and reproducible, making it ideal for learning, deployment, and academic use.
@@ -172,3 +172,4 @@ Clean UI and file handling
 Deployment-ready Streamlit applications
 
 Clear differentiation from cloud-based AI models
+
