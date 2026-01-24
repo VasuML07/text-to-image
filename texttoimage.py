@@ -77,9 +77,7 @@ with col1:
         )
     # Button that triggers image generation
     generate_btn = st.button("🚀 Generate Masterpiece")
-# -------------------------
 # RIGHT COLUMN: OUTPUT
-# -------------------------
 with col2:
     # Only run this block when the button is clicked
     if generate_btn:
@@ -169,3 +167,4 @@ with col2:
     # Default message before any image is generated
     else:
         st.info("Your image will appear here.")
+
