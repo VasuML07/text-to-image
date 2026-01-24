@@ -1,18 +1,44 @@
-# virtual environment
-venv/
-
-# cache
+# --- Python Specific ---
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
 
-# generated files
+# --- Streamlit Specific ---
+.streamlit/config.toml
+.streamlit/secrets.toml
+
+# --- Environment & API Keys ---
+.env
+.flaskenv
+*.key
+*.pem
+
+# --- Media & Generated Output ---
+# This prevents your local test images/PDFs from cluttering your repo
 *.png
+*.jpg
+*.jpeg
 *.pdf
 *.wav
+generated_*/
 
-# env variables
-.env
-
-# OS files
+# --- OS Specific ---
 .DS_Store
+.DS_Store?
+._*
 Thumbs.db
+desktop.ini
