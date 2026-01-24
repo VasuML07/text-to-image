@@ -1,107 +1,126 @@
-#ESSENTIAL LIBRARIES
-
-# it helps us for making a simple web app
 import streamlit as st
-#it lets python download things from internet
 import requests
-#helps python to talk to os system
-import os
-#image creation utilities
-from PIL import Image, ImageDraw, ImageFont
-import textwrap
+import io
+from PIL import Image
 
-
-
-#STREAMLIT USER INTERFACE
-
-st.set_page_config(page_title="Text to Image", layout="centered")
-
-st.title("📝 Text to Image (Offline & Free)")
-st.caption("Enter text → Generate image → Download as PNG or PDF")
-
-st.sidebar.header("ℹ️ Instructions")
-st.sidebar.write(
-    """
-    • Enter a description (max **1500 characters**)  
-    • Each line will contain **max 100 characters**  
-    • Text is rendered in **large readable font**  
-    • Image is generated locally  
-    • Works **offline**  
-    • Download as **PNG or PDF**
-    """
+st.set_page_config(
+    page_title="Visionary AI",
+    page_icon="🌌",
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
-#TEXT INPUT
-text_input = st.text_area(
-    "Enter text (max 1500 characters):",
-    max_chars=1500,
-    height=250,
-    placeholder="Example: A dog playing football in a green park..."
-)
+st.markdown("""
+    <style>
+    .main {
+        background-color: #0e1117;
+    }
+    .stButton>button {
+        width: 100%;
+        border-radius: 10px;
+        height: 3em;
+        background-color: #FF4B4B;
+        color: white;
+        font-weight: bold;
+        border: none;
+    }
+    .stTextArea>div>div>textarea {
+        border-radius: 10px;
+    }
+    .generated-image {
+        border-radius: 15px;
+        box-shadow: 0px 4px 20px rgba(0,0,0,0.5);
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
-#BUTTON
-if st.button("🎨 Generate Image"):
-    with st.spinner("Generating image..."):
+API_KEY = st.secrets["CLIPDROP_API_KEY"]
+API_URL = "https://clipdrop-api.co/text-to-image/v1"
 
-        #ensure text fallback
-        text = text_input.strip() if text_input.strip() else "Image Generated"
+with st.sidebar:
+    st.title("⚙️ Configuration")
+    st.info("Powered by Stability AI")
+    
+    style_preset = st.selectbox(
+        "Artistic Style",
+        ["None", "Photographic", "Digital Art", "Comic Book", "Fantasy Art", "Neonpunk", "Cinematic"],
+        index=1
+    )
+    
+    aspect_ratio = st.selectbox(
+        "Aspect Ratio",
+        ["1:1 (Square)", "16:9 (Widescreen)", "4:3 (Standard)", "2:3 (Portrait)"],
+        index=0
+    )
+    
+    st.divider()
+    st.caption("Credits are deducted per generation. Use prompts wisely.")
 
-        #wrap text into lines of max 100 chars
-        wrapped_lines = textwrap.wrap(text, width=100)
+col1, col2 = st.columns([1, 1.2], gap="large")
 
-        #paths
-        image_path = "generated_image.png"
-        pdf_path = "generated_image.pdf"
+with col1:
+    st.title("🌌 Visionary AI")
+    st.subheader("Transform your thoughts into high-resolution art.")
+    
+    prompt = st.text_area(
+        "Describe your masterpiece:",
+        placeholder="A futuristic laboratory in VIT-AP university, holographic screens, cinematic lighting, 8k resolution...",
+        height=200
+    )
+    
+    generate_btn = st.button("🚀 Generate Masterpiece")
 
-        #create image
-        img = Image.new("RGB", (1024, 1024), color="#f5f5f5")
-        draw = ImageDraw.Draw(img)
+with col2:
+    if generate_btn:
+        if not prompt.strip():
+            st.error("Please enter a description to visualize.")
+        else:
+            with st.status("🎨 Rendering your vision...", expanded=True) as status:
+                try:
+                    payload = {"prompt": (None, prompt.strip())}
+                    if style_preset != "None":
+                        payload["style_preset"] = (None, style_preset.lower().replace(" ", "-"))
 
-        try:
-            font = ImageFont.truetype("arial.ttf", 48)
-        except:
-            font = ImageFont.load_default()
+                    response = requests.post(
+                        API_URL,
+                        headers={"x-api-key": API_KEY},
+                        files=payload
+                    )
 
-        #line spacing
-        line_height = font.getbbox("A")[3] + 16
-        total_text_height = line_height * len(wrapped_lines)
+                    if response.ok:
+                        image_bytes = response.content
+                        img = Image.open(io.BytesIO(image_bytes))
+                        
+                        status.update(label="✅ Image Generated!", state="complete", expanded=False)
+                        
+                        st.image(img, use_container_width=True, caption=f"Style: {style_preset}")
+                        
+                        btn_col1, btn_col2 = st.columns(2)
+                        with btn_col1:
+                            st.download_button(
+                                label="🖼️ Download PNG",
+                                data=image_bytes,
+                                file_name="visionary_art.png",
+                                mime="image/png",
+                                use_container_width=True
+                            )
+                        with btn_col2:
+                            pdf_buffer = io.BytesIO()
+                            img.convert("RGB").save(pdf_buffer, format="PDF")
+                            st.download_button(
+                                label="📄 Download PDF",
+                                data=pdf_buffer.getvalue(),
+                                file_name="visionary_art.pdf",
+                                mime="application/pdf",
+                                use_container_width=True
+                            )
+                    else:
+                        status.update(label="❌ Generation Failed", state="error")
+                        st.error(f"API Error {response.status_code}: {response.text}")
 
-        #center vertically
-        y_start = max((1024 - total_text_height) // 2, 20)
-
-        #draw each line centered
-        for line in wrapped_lines:
-            bbox = draw.textbbox((0, 0), line, font=font)
-            text_width = bbox[2] - bbox[0]
-            x = (1024 - text_width) // 2
-
-            draw.text((x, y_start), line, fill="black", font=font)
-            y_start += line_height
-
-        #save files
-        img.save(image_path)
-        img.save(pdf_path, "PDF")
-
-        #display image
-        st.image(image_path, caption="Generated Image")
-
-        #download buttons
-        col1, col2 = st.columns(2)
-
-        with col1:
-            with open(image_path, "rb") as f:
-                st.download_button(
-                    label="⬇️ Download Image (PNG)",
-                    data=f,
-                    file_name="text_image.png",
-                    mime="image/png"
-                )
-
-        with col2:
-            with open(pdf_path, "rb") as f:
-                st.download_button(
-                    label="⬇️ Download Image (PDF)",
-                    data=f,
-                    file_name="text_image.pdf",
-                    mime="application/pdf"
-                )
+                except Exception as e:
+                    status.update(label="❌ Unexpected Error", state="error")
+                    st.error(f"Error: {e}")
+    else:
+        st.info("Your generated image will appear here.")
+        st.image("https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop", use_container_width=True)
