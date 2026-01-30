@@ -4,7 +4,7 @@ import streamlit as st
 import requests
 # Helps handle raw bytes as file-like objects (needed for images)
 import io
-# Used to decode Base64 image data returned by the API
+# Used to decode Base64 for encoding and decoding raw binary data
 import base64
 # Pillow library to open and manipulate images in Python
 from PIL import Image
@@ -167,4 +167,5 @@ with col2:
     # Default message before any image is generated
     else:
         st.info("Your image will appear here.")
+
 
