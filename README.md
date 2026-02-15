@@ -1,17 +1,78 @@
-🌌 Visionary AI: Offline Text-to-Image RendererVisionary AI is a lightweight, fully offline Streamlit application that transforms raw text into structured, high-quality images.
-git clone https://github.com/your-username/text-to-image.git
-cd text-to-image
+# 🌌 Visionary AI – Offline Text-to-Image Renderer
 
-# Create a virtual environment
+Visionary AI is a lightweight, fully offline Streamlit application that transforms raw text into structured, high-quality images.
+
+This project focuses on accurate **Text-to-Image rendering pipelines**, not generative artistic AI.  
+The output guarantees 100% textual fidelity from input to image.
+
+---
+
+## 🔗 Live Demo
+
+🌐 https://text-to-image-ksiwqntr2tbn5onze55tox.streamlit.app/
+
+---
+
+## 🛠 Tech Stack
+
+### 💻 Core Language
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+
+---
+
+### 🚀 Framework
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)
+
+---
+
+### 🖼 Image Processing
+![PIL](https://img.shields.io/badge/Pillow-000000?style=flat-square&logo=python&logoColor=white)
+
+---
+
+## ⚙️ Installation & Setup
+
+---
+
+### 📥 Clone Repository
+
+```bash
+git clone https://github.com/VasuML07/text-to-image.git
+cd text-to-image
+🧪 Create Virtual Environment
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-2️⃣ Install DependenciesBashpip install -r requirements.txt
-3️⃣ Launch the AppBashstreamlit run speechtoimage.py
-📁 Project StructurePlaintexttext-to-image/
+
+
+Activate:
+
+Windows
+
+venv\Scripts\activate
+
+
+macOS / Linux
+
+source venv/bin/activate
+
+📦 Install Dependencies
+pip install -r requirements.txt
+
+▶ Launch Application
+streamlit run speechtoimage.py
+
+📁 Project Structure
+text-to-image/
 ├── speechtoimage.py   # Core application logic
 ├── requirements.txt   # Dependency list
 ├── README.md          # Documentation
-└── .gitignore         # Prevents cluttering the repo with generated files
-📌 Future Roadmap[ ] Dynamic Scaling: Auto-adjust font size based on text volume.[ ] Custom Themes: Dark mode, Sepia, and Professional Blue backgrounds.[ ] Font Library: Integration with Google Fonts for custom typography.[ ] Local LLM: Optional integration with local models (Ollama/Llama3).👨‍💻 AuthorVasu Margana Computer Science Undergraduate | AI & ML EnthusiastNote: This project is designed for text visualization and structured documentation. It focuses on the "Text-to-Image" conversion pipeline rather than generative artistic AI, ensuring 100% accuracy of the input text in the output image.
+└── .gitignore         # Prevents clutter
 
-link https://text-to-image-ksiwqntr2tbn5onze55tox.streamlit.app/
+🔭 Future Roadmap
+
+ Dynamic Scaling (auto font size adjustment)
+
+ Custom Themes (Dark, Sepia, Professional Blue)
+
+ Extended Font Library Support
+
+ Optional Local LLM Integration (Ollama / Llama3)
